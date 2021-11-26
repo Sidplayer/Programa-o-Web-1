@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Space Ghost</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="Scrollable Thumbs Menu" />
+        <meta name="keywords" content="scrolling, jquery, vertical, thumbs, menu, navigation"/>
+        <link rel="stylesheet" href="css_sp/style.css" type="text/css" media="screen"/>
+        <style>
+
+            /*Edição da imagem de fundo*/
+            *{
+                margin:0;
+                padding:0;
+            }
+            body{
+                font-family:Arial;
+                padding:0px;
+                margin:0px;
+                background-color:#06447d; /*cor do fundo da página*/
+            }
+            a.model1{
+                background:transparent url(spaceghost.png) no-repeat top left;
+                position:absolute;
+                width:336px;
+                height:893px;
+                outline:none;
+                top:30px;
+                right:60px;
+                opacity:0.9;   
+            }
+            a.model1:hover{
+                opacity:1.0;
+                
+            }
+            .model2{
+                background:transparent url(spaceghost.png) no-repeat top left;
+                position:absolute;
+                width:336px;
+                height:893px;
+                outline:none;
+                top:50px;
+                right:15px;
+                opacity:0.4; 
+            }
+            /*Edição dos botões*/
+            a.back{
+                position:absolute;
+                bottom:0px;
+                left:730px;
+                width:230px; /*largura do botão do menu*/
+                height:40px; /*altura do botão do menu*/
+                text-align:center;
+                text-transform:uppercase;
+                line-height:40px; /*Largura da imagem do menu*/
+                color:#21130d; /*cor da fonte*/
+                background-color:#FBD436;/*cor do botão*/
+                letter-spacing:1px;
+                font-size:20px;
+                cursor:pointer;
+                text-decoration:none;
+                text-shadow:0px 0px 1px #fff;
+                -moz-box-shadow:-1px 0px 5px #000;
+                -webkit-box-shadow:-1px 0px 5px #000;
+                box-shadow:-1px 0px 5px #000;
+                opacity:0.9;
+                filter:progid:DXImageTransform.Microsoft.Alpha(opacity=90);
+
+            }
+            a.back:hover{
+                opacity:1.0;
+                filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+            }
+            div.fixed{
+                position: fixed;
+                border: 3px solid #73AD21;
+                width: 300px;
+                left: 30px;
+            }
+            /*organizar a posição na página*/
+            .container {
+                width: 60%;
+                padding: 50px;
+            }
+
+        </style>
+    </head>
+    <body>
+        
+        <div class="container">
+            <h1><b>Space Ghost</b></h1><br>
+        <p><h3>Space Ghost foi o primeiro super-herói da Hannah-Barbera. Com seu quartel general localizado no Planeta Fantasma, sua nave espacial, o Cruzador Fantasma, e seus poderosos Braceletes Energéticos, Space Ghost é um patrulheiro espacial, com a missão de proteger todo um quadrante - no qual está incluída a Terra - das ameaças alienígenas.</p><br>
+
+        <p>Todos os seus poderes vêm de seu traje e dos Braceletes Energéticos. O traje permite que Space Ghost fique invisível, crie um campo de força para protegê-lo, lhe confere visão de raio-x, teletransporte, além de permitir que ele voe (mais depressa que o Cruzador Fantasma, o que nos faz perguntar por que ele precisa de uma nave), sobreviva no espaço e sob a água, e conte com um comunicador direto com os demais patrulheiros e com o Planeta Fantasma.</p><br> <p>Os Braceletes permitem que Space Ghost dispare diversos tipos de raios diferentes, como um raio congelante, raio atordoante, raio destruidor, raio trator, e até mesmo um raio de viagem no tempo. Selecionando um tipo de raio diferente em cada mão, Space Ghost também pode disparar "raios combinados", ou multiplicar a força de um raio por 5.</h3></p>
+        </div>
+        <div><footer>
+          <b>Sidney Santos Simões - Etecia</b>
+        </footer></div> 
+        <div class="content">
+            <div class="model2"></div>
+            <a href="index.html" class="model1"></a>
+            <a class="back" href="index.html">Home</a>
+            <ul class="menu" id="menu">
+                <li>
+                    <a href="#">Space Ghost 1</a>
+                    <div class="sc_menu_wrapper">
+                        <div class="sc_menu">
+                            <a href="images_sp/spaceghost1.jpg"><img src="images_sp/spaceghost1.jpg" alt="Space Ghost"/></a>
+                            <a href="images_sp/spaceghost2.jpg"><img src="images_sp/spaceghost2.jpg" alt="Space Ghost 2"/></a>
+                            <a href="images_sp/spaceghost3.jpg"><img src="images_sp/spaceghost3.jpg" alt="Space Ghost"/></a>
+                            <a href="images_sp/spaceghost4.jpg"><img src="images_sp/spaceghost4.jpg" alt="Space Ghost"/></a>
+                            <a href="images_sp/spaceghost5.jpg"><img src="images_sp/spaceghost5.jpg" alt="Space Ghost"/></a>
+                            <a href="images_sp/spaceghost6.png"><img src="images_sp/spaceghost6.png" alt="Space Ghost"/></a>                           
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">Space Ghost 2</a>
+                    <div class="sc_menu_wrapper">
+                        <div class="sc_menu">
+                            <a href="images_sp/space1.jpg"><img src="images_sp/space1.jpg" alt="Space Ghost"/></a>
+                            <a href="images_sp/space2.jpg"><img src="images_sp/space2.jpg" alt="Space Ghost"/></a>
+                            <a href="images_sp/space3.jpg"><img src="images_sp/space3.jpg" alt="Space Ghost"/></a>
+                            <a href="images_sp/space4.jpg"><img src="images_sp/space4.jpg" alt="Space Ghost"/></a>
+                            <a href="images_sp/space5.jpg"><img src="images_sp/space5.jpg" alt="Space Ghost"/></a>
+                            <a href="images_sp/space6.jpg"><img src="images_sp/space6.jpg" alt="Space Ghost"/></a>                   
+                        </div>
+                    </div> 
+                </li> 
+            </ul>
+
+        </div>
+        <!-- O JavaScript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                /* função para tornar o menu de polegares rolável */
+                function buildThumbs($elem){
+                    var $wrapper    	= $elem.next();
+                    var $menu 		= $wrapper.find('.sc_menu');
+                    var inactiveMargin 	= 150;
+                    /* mova a rolagem para baixo até o
+                    começo (mova tanto quanto a altura do menu) */
+                    $wrapper.scrollTop($menu.outerHeight());
+                    
+                    /* ao mover o mouse para cima ou para baixo, o invólucro se move (pergaminhos) Para cima ou para baixo */
+                    $wrapper.bind('mousemove',function(e){
+                        var wrapperHeight 	= $wrapper.height();
+                        var menuHeight 	= $menu.outerHeight() + 2 * inactiveMargin;
+                        var top 	= (e.pageY - $wrapper.offset().top) * (menuHeight - wrapperHeight) / wrapperHeight - inactiveMargin;
+                        $wrapper.scrollTop(top+10);
+                    });
+                }
+                
+                var stacktime;
+				
+                $('#menu li > a').bind('mouseover',function () {
+                    var $this = $(this);
+					
+                    buildThumbs($this);
+					
+                    var pos	=	$this.next().find('a').size();
+                    var f	=	function(){
+                        if(pos==0) clearTimeout(stacktime);
+                        $this.next().find('a:nth-child('+pos+')').css('visibility','visible');
+                        --pos;
+                    };
+                    /* cada polegar aparecerá com um atraso */
+                    stacktime = setInterval(f , 50);
+                });
+                
+                /* na linha toda do mouse <li> a área de rolagem está oculta */
+                $('#menu li').bind('mouseleave',function () {
+                    var $this = $(this);
+                    clearTimeout(stacktime);
+                    $this.find('.sc_menu').css('visibility','hidden').find('a').css('visibility','hidden');
+                    $this.find('.sc_menu_wrapper').css('visibility','hidden');
+                });
+                
+                /* ao passar a ponteira, mude sua opacidade das imagens */
+                $('.sc_menu a').hover(
+                function () {
+                    var $this = $(this);
+                    $this.find('img')
+                    .stop()
+                    .animate({'opacity':'1.0'},400);
+                },
+                function () {
+                    var $this = $(this);
+                    $this.find('img')
+                    .stop()
+                    .animate({'opacity':'0.3'},400);
+                }
+            );
+            });
+        </script>
+    </body>
+</html>

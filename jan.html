@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Jan</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="Sweet Thumbnails Preview Gallery with jQuery" />
+        <meta name="keywords" content="jquery, thumbnails preview, image gallery, sliding"/>
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+        <link rel="stylesheet" type="text/css" href="css_ja/style.css" />
+        <style>
+        	body{
+                font-family:Arial;
+                padding:0px;
+                margin:0px;
+                background-color:#06447d; /*cor do fundo da página*/
+            }
+           
+        </style>
+    </head>
+    <body>		
+		<div id="loader" class="loader"></div>
+		<div class="wrapper">
+			<h1>Space Ghost - Jan -</h1>
+			<h2>Jan foi uma dos ajudantes do Space Ghost durante suas primeiras aventuras, junto com seu irmão gêmeo Jace e seu macaco Blip. Ela viajou a bordo do Phantom Cruiser.</h2>
+			<div id="ps_container" class="ps_container">
+				<div class="ps_image_wrapper">
+					<!-- Primeira imagem inicial -->
+					<img src="images_ja/jan1.jpg" alt="" />
+				</div>
+				<!-- Itens de navegação -->
+				<div class="ps_next"></div>
+				<div class="ps_prev"></div>
+				<!-- Lista de pontos com visualização em miniatura -->
+				<ul class="ps_nav">
+					<li class="selected"><a href="images_ja/jan1.jpg" rel="images_ja/jan1.jpg">Image 1</a></li>
+					<li><a href="images_ja/jan2.jpg" rel="images_ja/jan2.jpg">Image 2</a></li>
+					<li><a href="images_ja/jan3.jpg" rel="images_ja/jan3.jpg">Image 3</a></li>
+					<li><a href="images_ja/jan4.jpg" rel="images_ja/jan4.jpg">Image 4</a></li>
+					<li><a href="images_ja/jan5.jpg" rel="images_ja/jan5.jpg">Image 5</a></li>			
+					<li class="ps_preview">
+						<div class="ps_preview_wrapper">
+							<!-- A miniatura vem aqui -->
+						</div>
+						<!-- Pequeno triangulo -->
+						<span></span>
+					</li>
+				</ul>			
+			</div>
+			<div><footer>
+          		<b>Sidney Santos Simões - Etecia</b>
+        	</footer></div>
+		</div>
+		<div class="footer">
+			<a href="index.html"><strong>&laquo;Volte para a página inícial</strong></a>		
+		</div>
+
+		<!-- The JavaScript -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript">
+			/*
+			o plugin de pré-carregamento de imagens
+			*/
+			(function($) {
+				$.fn.preload = function(options) {
+					var opts 	= $.extend({}, $.fn.preload.defaults, options),
+						o		= $.meta ? $.extend({}, opts, this.data()) : opts;
+					return this.each(function() {
+						var $e	= $(this),
+							t	= $e.attr('rel'),
+							i	= $e.attr('href'),
+							l	= 0;
+						$('<img/>').load(function(i){
+							++l;
+							if(l==2) o.onComplete();
+						}).attr('src',i);	
+						$('<img/>').load(function(i){
+							++l;
+							if(l==2) o.onComplete();
+						}).attr('src',t);	
+					});
+				};
+				$.fn.preload.defaults = {
+					onComplete	: function(){return false;}
+				};
+			})(jQuery);
+		</script>
+        <script type="text/javascript">
+			$(function() {
+				//alguns elementos..
+				var $ps_container		= $('#ps_container'),
+					$ps_image_wrapper 	= $ps_container.find('.ps_image_wrapper'),
+					$ps_next			= $ps_container.find('.ps_next'),
+					$ps_prev			= $ps_container.find('.ps_prev'),
+					$ps_nav				= $ps_container.find('.ps_nav'),
+					$tooltip			= $ps_container.find('.ps_preview'),
+					$ps_preview_wrapper = $tooltip.find('.ps_preview_wrapper'),
+					$links				= $ps_nav.children('li').not($tooltip),
+					total_images		= $links.length,
+					currentHovered		= -1,
+					current				= 0,
+					$loader				= $('#loader');
+				
+				/*verifique se você está usando um navegador*/	
+				var ie 				= false;
+				if ($.browser.msie) {
+					ie = true;//você não é! De qualquer forma, vamos tentar
+				}
+				if(!ie)
+					$tooltip.css({
+						opacity	: 0
+					}).show();
+					
+					
+				/*primeiras imagens de pré-carregamento (polegares e imagens grandes)*/
+				var loaded	= 0;
+				$links.each(function(i){
+					var $link 	= $(this);
+					$link.find('a').preload({
+						onComplete	: function(){
+							++loaded;
+							if(loaded == total_images){
+								//todas as imagens pré carregadas,
+								//mostrar ps_container e inicializar event
+								$loader.hide();
+								$ps_container.show();
+								// quando a imagem entra na página (os pontos),
+								//mostre a dica de ferramentas,
+								//quando o mouse sai esconde a dica de ferramentas,
+								//clicar em um irá mostrar a respectiva imagem	
+								$links.bind('mouseenter',showTooltip)
+									  .bind('mouseleave',hideTooltip)
+									  .bind('click',showImage);
+								//navegue pelas imagens
+								$ps_next.bind('click',nextImage);
+								$ps_prev.bind('click',prevImage);
+							}
+						}
+					});
+				});
+				
+				function showTooltip(){
+					var $link			= $(this),
+						idx				= $link.index(),
+						linkOuterWidth	= $link.outerWidth(),
+						//isso mantem o valor esquerdo para a próxima posição
+						//da dica de ferramentas
+						left			= parseFloat(idx * linkOuterWidth) - $tooltip.width()/2 + linkOuterWidth/2,
+						//a fonte da imagem de polegar
+						$thumb			= $link.find('a').attr('rel'),
+						imageLeft;
+					
+					//se não estivermos pairando sobre o atual
+					if(currentHovered != idx){
+						//verifique se vamos animar esquerda-> direita ou direita-> esquerda
+						if(currentHovered != -1){
+							if(currentHovered < idx){
+								imageLeft	= 75;
+							}
+							else{
+								imageLeft	= -75;
+							}
+						}
+						currentHovered = idx;
+						
+						//a próxima imagem em miniatura a ser mostrada na dica de ferramenta
+						var $newImage = $('<img/>').css('left','0px')
+												   .attr('src',$thumb);
+						
+						//se houver mais de 1 imagem 
+						//(se movêssemos o mouse muito rápido, provavelmente aconteceria)
+						//em seguida, remova o mais antigo (: último)
+						if($ps_preview_wrapper.children().length > 1)
+							$ps_preview_wrapper.children(':last').remove();
+						
+						//prefixar a nova imagem
+						$ps_preview_wrapper.prepend($newImage);
+						
+						var $tooltip_imgs		= $ps_preview_wrapper.children(),
+							tooltip_imgs_count	= $tooltip_imgs.length;
+							
+						//se houver 2 imagens na dica de ferramenta
+						//animar o atual fora, e o novo dentro
+						if(tooltip_imgs_count > 1){
+							$tooltip_imgs.eq(tooltip_imgs_count-1)
+										 .stop()
+										 .animate({
+											left:-imageLeft+'px'
+										  },40,function(){
+												//remova o antigo
+												$(this).remove();
+										  });
+							$tooltip_imgs.eq(0)
+										 .css('left',imageLeft + 'px')
+										 .stop()
+										 .animate({
+											left:'0px'
+										  },40);
+						}
+					}
+					//se não estivermos usando um "navegador", apenas mostramos a dica,
+					//caso contrário, nós desapareceremos
+					//
+					if(ie)
+						$tooltip.css('left',left + 'px').show();
+					else
+					$tooltip.stop()
+							.animate({
+								left		: left + 'px',
+								opacity		: 1
+							},150);
+				}
+				
+				function hideTooltip(){
+					//ocultar / esmaecer a dica de ferramenta
+					if(ie)
+						$tooltip.hide();
+					else
+					$tooltip.stop()
+						    .animate({
+								opacity		: 0
+							},150);
+				}
+				
+				function showImage(e){
+					var $link				= $(this),
+						idx					= $link.index(),
+						$image				= $link.find('a').attr('href'),
+						$currentImage 		= $ps_image_wrapper.find('img'),
+						currentImageWidth	= $currentImage.width();
+					
+					//se clicarmos no atual retornar
+					if(current == idx) return false;
+					
+					//adicionar classe selecionada para a página / ponto atua
+					$links.eq(current).removeClass('selected');
+					$link.addClass('selected');
+					
+					// o novo elemento de imagem
+					var $newImage = $('<img/>').css('left',currentImageWidth + 'px')
+											   .attr('src',$image);
+					
+					//se o wrapper tiver mais de uma imagem, remova a mais antiga
+					if($ps_image_wrapper.children().length > 1)
+						$ps_image_wrapper.children(':last').remove();
+					
+					//prefixar a nova imagem
+					$ps_image_wrapper.prepend($newImage);
+					
+					//a nova largura da imagem. 
+					//Esta será a nova largura do ps_image_wrapper
+					var newImageWidth	= $newImage.width();
+				
+					// verificar a direção da animação
+					if(current > idx){
+						$newImage.css('left',-newImageWidth + 'px');
+						currentImageWidth = -newImageWidth;
+					}	
+					current = idx;
+					// anime a nova largura 
+					//(igual à largura da nova imagem)
+					$ps_image_wrapper.stop().animate({
+					    width	: newImageWidth + 'px'
+					},350);
+					//animar a nova imagem em
+					$newImage.stop().animate({
+					    left	: '0px'
+					},350);
+					//animar a imagem antiga
+					$currentImage.stop().animate({
+					    left	: -currentImageWidth + 'px'
+					},350);
+				
+					e.preventDefault();
+				}				
+				
+				function nextImage(){
+					if(current < total_images){
+						$links.eq(current+1).trigger('click');
+					}
+				}
+				function prevImage(){
+					if(current > 0){
+						$links.eq(current-1).trigger('click');
+					}
+				}
+			});
+        </script>
+    </body>
+</html>

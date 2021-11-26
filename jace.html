@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Jace</title>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Hover and Click Trigger for Circular Elements with jQuery - jQuery plugin for hovering and clicking on circles" />
+        <meta name="keywords" content="jquery, hover, plugin, click, trigger, event, custom, area, web development, circle, circular shape, css3" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Kelly+Slab' rel='stylesheet' type='text/css' />
+		<noscript>
+			<link rel="stylesheet" type="text/css" href="css/noscript.css" />
+		</noscript>
+		<script type="text/javascript" src="js/modernizr.custom.72835.js"></script>
+    </head>
+    <body>
+        <div class="container">
+           <div class="header">
+                <a href="index.html"><strong>&laquo; Prévia demostração: </strong>Volte para a página inícial</a>       
+                <div class="clr"></div>
+            </div>
+            <div class="wrapper">
+				<!-- If browser does not support border radius, show this message -->
+				<p class="message">Your browser does not support the border-radius property!</p>
+				<div class="section">
+					<div class="normal-trigger-area">
+						<a href="#" id="circle" class="ec-circle">
+							<h3>Jace</h3>
+						</a>
+					</div>
+					<div class="content">
+						<h1><b>Jace foi um dos ajudantes do Space Ghost</h1>
+						<p><strong></strong>durante seu tempo como super-herói, junto com sua irmã gêmea Jan e seu macaco de estimação Blip.</p>
+						<p>Ele usa uma roupa azul claro e amarelo com uma máscara preta. Jace usa um jetpack para voar, um cinto que lhe dá o poder de ficar invisível e um emblema do Space Ghost em seu peito que </p>
+						<p>ele usa como um dispositivo de comunicação.</strong></p>			
+					</div>	
+				</div>
+            </div>
+            <div><footer>
+          		<b>Sidney Santos Simões - Etecia</b>
+        	</footer></div>
+        </div>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.circlemouse.js"></script>
+        <script type="text/javascript">
+            $(function() {
+				
+				$('#circle').circlemouse({
+					onMouseEnter	: function( el ) {
+					
+						el.addClass('ec-circle-hover');
+					
+					},
+					onMouseLeave	: function( el ) {
+						
+						el.removeClass('ec-circle-hover');
+						
+					},
+					onClick			: function( el ) {
+						
+						alert('clicked');
+						
+					}
+				});
+				
+			});
+        </script>
+    </body>
+</html>
